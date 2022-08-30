@@ -1,6 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib import messages
+
 from .models import Post
 from django.views.generic import (
     ListView,
@@ -59,6 +62,8 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == post.author:
             return True
         return False
+
+
 
 
 
